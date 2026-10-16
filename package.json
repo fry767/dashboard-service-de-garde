@@ -1,0 +1,17 @@
+{
+  "name": "garderie-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Tableau de bord local des listes d’attente du portail des services de garde du Québec",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node --test",
+    "test:browser": "node checks/collector-browser.mjs",
+    "check": "node --check src/server.mjs && node --check src/scraper.mjs && node --check src/extract.mjs && node --check src/store.mjs && node --check public/app.js && node --check public/messages.js && node --check scripts/check-share.mjs",
+    "check:share": "node scripts/check-share.mjs"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": { "playwright": "^1.56.0" }
+}

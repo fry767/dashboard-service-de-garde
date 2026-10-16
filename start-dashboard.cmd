@@ -1,0 +1,18 @@
+@echo off
+cd /d "%~dp0"
+where node >nul 2>nul
+if errorlevel 1 (
+  echo Installez Node.js 22 ou plus recent, puis relancez ce fichier.
+  pause
+  exit /b 1
+)
+if not exist "node_modules\playwright\package.json" (
+  call npm.cmd ci --cache .local/npm-cache --no-audit --no-fund
+  if errorlevel 1 (
+    pause
+    exit /b 1
+  )
+)
+echo Demarrage du tableau de bord...
+node src\server.mjs
+if errorlevel 1 pause

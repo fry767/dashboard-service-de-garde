@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light"><title>Petits pas · Listes d’attente en service de garde</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23274f42'/%3E%3Ctext x='16' y='46' fill='%23edf3c4' font-size='44'%3Ep%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css"><script type="module" src="/app.js"></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Accueil de Petits pas"><span class="brand-mark">p<span>·</span></span><span>petits pas<span class="brand-caption">UN PAS À LA FOIS</span></span></a>
+    <div class="workspace-label">VOTRE ESPACE FAMILIAL</div>
+    <a class="nav-item active" href="#overview"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Vue d’ensemble<span class="nav-dot"></span></a>
+    <a class="nav-item" href="#registrations"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5H5v16h14V5h-3M9 3h6v5H9zM8 13h8M8 17h5"/></svg>Mes demandes</a>
+    <button class="nav-item" id="export-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 16v5h14v-5"/></svg>Exporter l’historique</button>
+    <div class="sidebar-bottom"><div class="local-dot"></div><div><strong>Sur votre ordinateur</strong><p>Vos relevés restent ici.</p></div></div>
+  </aside>
+
+  <div class="page-shell">
+    <header class="topbar"><span>Listes d’attente <span class="breadcrumb">/ Vue d’ensemble</span></span><a href="https://www.portail-servicesgarde.gouv.qc.ca/parent/s/demandes-admission" target="_blank" rel="noreferrer">Ouvrir le portail gouvernemental <span aria-hidden="true">↗</span></a></header>
+    <main id="overview">
+      <div class="heading-row"><div><p class="eyebrow">UN PAS DE PLUS VERS UNE PLACE</p><h1>Vos listes d’attente<span>.</span></h1><p class="intro">Toutes vos demandes réunies pour mieux suivre votre progression.</p></div><div class="heading-actions"><button class="button secondary" id="connect-button">Connexion au portail <span aria-hidden="true">↗</span></button><button class="button primary" id="refresh-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6 6a8 8 0 0 1 13 3M5 15a8 8 0 0 0 13 3"/></svg>Actualiser</button></div></div>
+
+      <section class="connection-banner" id="connection-banner" aria-live="polite"><div class="status-symbol" id="status-symbol">↗</div><div><strong id="status-title">Connectez vos listes d’attente</strong><p id="status-message">Connectez-vous au portail gouvernemental dans la fenêtre qui s’ouvre, puis actualisez vos demandes ici.</p></div><span class="status-label" id="status-label">NON CONNECTÉ</span></section>
+      <div id="notice" class="notice hidden" role="alert"></div>
+
+      <section class="stats" aria-label="Résumé des listes d’attente">
+        <article class="stat-card"><div class="stat-top">Demandes suivies <span class="stat-icon">☷</span></div><strong class="stat-value" id="stat-count">0</strong><p id="stat-count-note">Vos demandes en service de garde</p></article>
+        <article class="stat-card best"><div class="stat-top">Moins d’enfants devant <span class="stat-icon">↗</span></div><strong class="stat-value" id="stat-best">—</strong><p id="stat-best-note">Votre liste la mieux placée</p></article>
+        <article class="stat-card"><div class="stat-top">Listes en progression <span class="stat-icon">↘</span></div><strong class="stat-value" id="stat-improved">—</strong><p id="stat-improved-note">Par rapport au relevé précédent</p></article>
+        <article class="stat-card"><div class="stat-top">Dernier relevé <span class="stat-icon">◷</span></div><strong class="stat-value date-value" id="stat-last">Aucun relevé</strong><p id="stat-last-note">À votre prochaine actualisation</p></article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel evolution-panel"><div class="panel-heading"><div><p class="eyebrow small">SUIVRE VOTRE PROGRESSION</p><h2>Évolution au fil du temps</h2></div><span class="pill">Plus bas = plus près</span></div><div class="chart-controls"><label for="chart-registration">Liste d’attente</label><select id="chart-registration"><option value="">Choisissez une demande après la connexion</option></select></div><div id="history-chart" class="chart-region"><div class="chart-empty"><svg viewBox="0 0 80 45" aria-hidden="true"><path d="M2 8h76M2 23h76M2 38h76" class="chart-grid"/><path d="m5 12 16 5 16-3 18 13 20 7" class="chart-line"/><circle cx="75" cy="34" r="4"/></svg><strong>Tout commence avec un premier relevé</strong><p>Actualisez vos demandes pour commencer le suivi.</p></div></div><div class="chart-footer"><span><span class="legend-dot"></span>Enfants devant le vôtre</span><span id="chart-footnote">Intervalles affichés tels quels</span></div></article>
+        <article class="panel guide-panel"><span class="guide-icon" aria-hidden="true">✳</span><p class="eyebrow small">COMPRENDRE VOS CHIFFRES</p><h2>De petits pas.<br>Un portrait plus clair.</h2><p>L’indicateur du portail est approximatif et mis à jour chaque mois. L’actualisation enregistre les valeurs affichées aujourd’hui.</p><div class="guide-rule"></div><p>Certains services affichent un intervalle. Nous le conservons pour refléter fidèlement l’information disponible.</p><a href="https://www.quebec.ca/famille-et-soutien-aux-personnes/enfance/garderies-et-services-de-garde/portail-inscription/parents/indicateur-rang" target="_blank" rel="noreferrer">Comprendre l’indicateur de rang <span aria-hidden="true">↗</span></a></article>
+      </section>
+
+      <section class="panel registrations-panel" id="registrations"><div class="panel-heading"><div class="registration-title"><h2>Vos demandes d’admission</h2><span class="count-badge" id="registration-count">0</span></div><div class="table-tools"><input type="search" id="search" placeholder="Rechercher un service de garde…" aria-label="Rechercher dans les demandes"><select id="sort" aria-label="Trier les demandes"><option value="closest">Meilleur rang</option><option value="name">Nom de A à Z</option><option value="recent">Relevés récents</option></select></div></div><div class="table-wrap"><table><thead><tr><th>Service de garde</th><th>Enfants devant</th><th>Depuis le dernier relevé</th><th>Dernier relevé</th><th><span class="sr-only">Consulter la demande</span></th></tr></thead><tbody id="registration-rows"></tbody></table></div><div id="registration-empty" class="registration-empty"><div class="empty-art" aria-hidden="true"><span>01</span><span>02</span><span>03</span></div><h3>Une vue sur chaque liste d’attente.</h3><p>Connectez-vous au portail, puis actualisez vos demandes.<br class="desktop-break"> Chaque indicateur de rang sera relevé et affiché ici.</p><button class="button secondary" id="empty-connect">Connexion au portail <span aria-hidden="true">↗</span></button></div><div class="table-bottom"><span id="table-caption">Aucun relevé pour le moment</span><button class="text-button" id="inspect-button">Lire l’indicateur ouvert <span aria-hidden="true">↗</span></button></div></section>
+      <footer class="page-footer"><span>Pour suivre l’attente. Et chaque pas en avant.</span><span>Tableau de bord local · Portail des services de garde du Québec</span></footer>
+    </main>
+  </div>
+
+  <dialog id="reading-dialog"><form id="reading-form"><div class="dialog-heading"><div><p class="eyebrow small">INDICATEUR OUVERT</p><h2>Conserver ce relevé</h2></div><button class="icon-button" type="button" id="close-dialog" aria-label="Fermer la fenêtre">×</button></div><p class="dialog-help">Ouvrez l’indicateur de rang d’une demande dans le navigateur connecté. Vérifiez les renseignements ci-dessous avant d’enregistrer.</p><label for="daycare-input">Service de garde</label><input id="daycare-input" name="daycare" required maxlength="200"><label for="child-input">Prénom ou surnom de l’enfant <span class="optional">(facultatif)</span></label><input id="child-input" name="child" maxlength="100"><label for="quantity-input">Enfants devant le vôtre, selon le portail</label><input id="quantity-input" name="quantity" placeholder="Par exemple : 11–50 ou 201+" required><details><summary>Texte relevé près de l’indicateur</summary><pre id="indicator-excerpt"></pre></details><p id="reading-error" class="form-error" role="alert"></p><button class="button primary" id="save-reading" type="submit">Enregistrer le relevé</button></form></dialog>
+</body>
+</html>
