@@ -1,5 +1,9 @@
 # Petits pas
 
+![Aperçu du tableau de bord Petits pas : statistiques, évolution des listes d’attente et demandes d’admission.](docs/images/dashboard.png)
+
+*Aperçu avec des services de garde, un enfant et des chiffres entièrement fictifs.*
+
 Un tableau de bord **local et en français** pour suivre les listes d’attente du [Portail d’inscription aux services de garde du Québec](https://www.portail-servicesgarde.gouv.qc.ca/parent/s/demandes-admission).
 
 Connectez-vous vous-même au portail. L’application ouvre vos demandes d’admission, consulte leur **indicateur de rang** et conserve des relevés datés sur votre ordinateur. Aucun compte particulier ni aucune liste de garderies n’est intégré au code.
